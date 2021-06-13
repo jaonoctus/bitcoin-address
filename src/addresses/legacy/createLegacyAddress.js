@@ -37,21 +37,21 @@ const createLegacyAddress = (privateKey = null) => {
 
   const publicKeySHA256HashRIPEMD60Bytes = hexToBytes(publicKeySHA256HashRIPEMD60Hash)
 
-  const versionAndpublicKeySHA256HashRIPEMD60Bytes = [version, ...publicKeySHA256HashRIPEMD60Bytes]
+  const versionAndPublicKeySHA256HashRIPEMD60Bytes = [version, ...publicKeySHA256HashRIPEMD60Bytes]
 
-  const versionAndpublicKeySHA256HashRIPEMD60Hash = bytesToHex(versionAndpublicKeySHA256HashRIPEMD60Bytes)
+  const versionAndPublicKeySHA256HashRIPEMD60Hash = bytesToHex(versionAndPublicKeySHA256HashRIPEMD60Bytes)
 
   // 5. Perform SHA-256 hash on the extended RIPEMD-160 result
-  const versionAndpublicKeySHA256HashRIPEMD60HashSHA256Hash = sha256(versionAndpublicKeySHA256HashRIPEMD60Bytes)
+  const versionAndPublicKeySHA256HashRIPEMD60HashSHA256Hash = sha256(versionAndPublicKeySHA256HashRIPEMD60Bytes)
 
   // 6. Perform SHA-256 hash on the result of the previous SHA-256 hash
-  const versionAndpublicKeySHA256HashRIPEMD60HashSHA256HashSHA256Hash = sha256(hexToBytes(versionAndpublicKeySHA256HashRIPEMD60HashSHA256Hash))
+  const versionAndPublicKeySHA256HashRIPEMD60HashSHA256HashSHA256Hash = sha256(hexToBytes(versionAndPublicKeySHA256HashRIPEMD60HashSHA256Hash))
 
   // 7. Take the first 4 bytes of the second SHA-256 hash.
-  const checksum = versionAndpublicKeySHA256HashRIPEMD60HashSHA256HashSHA256Hash.substr(0, 8)
+  const checksum = versionAndPublicKeySHA256HashRIPEMD60HashSHA256HashSHA256Hash.substr(0, 8)
 
   // 8. Add the 4 checksum bytes from stage 7 at the end of extended RIPEMD-160 hash from stage 4. This is the 25-byte binary Bitcoin Address.
-  const unencodedAddress = `${versionAndpublicKeySHA256HashRIPEMD60Hash}${checksum}`
+  const unencodedAddress = `${versionAndPublicKeySHA256HashRIPEMD60Hash}${checksum}`
 
   // 9. Convert the result from a byte string into a base58 string using Base58Check encoding. This is the most commonly used Bitcoin Address format
   const address = base58.encode(Buffer.from(hexToBytes(unencodedAddress)))
@@ -61,9 +61,9 @@ const createLegacyAddress = (privateKey = null) => {
     publicKey,
     publicKeySHA256Hash,
     publicKeySHA256HashRIPEMD60Hash,
-    versionAndpublicKeySHA256HashRIPEMD60Hash,
-    versionAndpublicKeySHA256HashRIPEMD60HashSHA256Hash,
-    versionAndpublicKeySHA256HashRIPEMD60HashSHA256HashSHA256Hash,
+    versionAndPublicKeySHA256HashRIPEMD60Hash,
+    versionAndPublicKeySHA256HashRIPEMD60HashSHA256Hash,
+    versionAndPublicKeySHA256HashRIPEMD60HashSHA256HashSHA256Hash,
     checksum,
     unencodedAddress,
     address
