@@ -62,6 +62,7 @@ const createLegacyAddress = (privateKey = null) => {
   return {
     privateKey,
     publicKey,
+    publicKeySHA256Hash,
     publicKeySHA256HashRIPEMD60Hash,
     versionAndpublicKeySHA256HashRIPEMD60Hash,
     versionAndpublicKeySHA256HashRIPEMD60HashSHA256Hash,
