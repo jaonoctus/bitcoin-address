@@ -27,31 +27,31 @@ const createLegacyAddress = (privateKey = null) => {
   // 3. Perform RIPEMD-160 hashing on the result of SHA-256
   const publicKeySHA256Bytes = hexToBytes(publicKeySHA256Hash)
 
-  const publicKeySHA256HashRIPEMD60BytesBuffer = ripemd160(Buffer.from(publicKeySHA256Bytes))
+  const publicKeySHA256HashRIPEMD160BytesBuffer = ripemd160(Buffer.from(publicKeySHA256Bytes))
 
-  const publicKeySHA256HashRIPEMD60Hash = bytesToHex(publicKeySHA256HashRIPEMD60BytesBuffer)
+  const publicKeySHA256HashRIPEMD160Hash = bytesToHex(publicKeySHA256HashRIPEMD160BytesBuffer)
 
   // 4. Add version byte in front of RIPEMD-160 hash
   // https://en.bitcoin.it/wiki/List_of_address_prefixes
   const version = 0x00 // mainnet
 
-  const publicKeySHA256HashRIPEMD60Bytes = hexToBytes(publicKeySHA256HashRIPEMD60Hash)
+  const publicKeySHA256HashRIPEMD160Bytes = hexToBytes(publicKeySHA256HashRIPEMD160Hash)
 
-  const versionAndPublicKeySHA256HashRIPEMD60Bytes = [version, ...publicKeySHA256HashRIPEMD60Bytes]
+  const versionAndPublicKeySHA256HashRIPEMD160Bytes = [version, ...publicKeySHA256HashRIPEMD160Bytes]
 
-  const versionAndPublicKeySHA256HashRIPEMD60Hash = bytesToHex(versionAndPublicKeySHA256HashRIPEMD60Bytes)
+  const versionAndPublicKeySHA256HashRIPEMD160Hash = bytesToHex(versionAndPublicKeySHA256HashRIPEMD160Bytes)
 
   // 5. Perform SHA-256 hash on the extended RIPEMD-160 result
-  const versionAndPublicKeySHA256HashRIPEMD60HashSHA256Hash = sha256(versionAndPublicKeySHA256HashRIPEMD60Bytes)
+  const versionAndPublicKeySHA256HashRIPEMD160HashSHA256Hash = sha256(versionAndPublicKeySHA256HashRIPEMD160Bytes)
 
   // 6. Perform SHA-256 hash on the result of the previous SHA-256 hash
-  const versionAndPublicKeySHA256HashRIPEMD60HashSHA256HashSHA256Hash = sha256(hexToBytes(versionAndPublicKeySHA256HashRIPEMD60HashSHA256Hash))
+  const versionAndPublicKeySHA256HashRIPEMD160HashSHA256HashSHA256Hash = sha256(hexToBytes(versionAndPublicKeySHA256HashRIPEMD160HashSHA256Hash))
 
   // 7. Take the first 4 bytes of the second SHA-256 hash.
-  const checksum = versionAndPublicKeySHA256HashRIPEMD60HashSHA256HashSHA256Hash.substr(0, 8)
+  const checksum = versionAndPublicKeySHA256HashRIPEMD160HashSHA256HashSHA256Hash.substr(0, 8)
 
   // 8. Add the 4 checksum bytes from stage 7 at the end of extended RIPEMD-160 hash from stage 4. This is the 25-byte binary Bitcoin Address.
-  const unencodedAddress = `${versionAndPublicKeySHA256HashRIPEMD60Hash}${checksum}`
+  const unencodedAddress = `${versionAndPublicKeySHA256HashRIPEMD160Hash}${checksum}`
 
   // 9. Convert the result from a byte string into a base58 string using Base58Check encoding. This is the most commonly used Bitcoin Address format
   const address = base58.encode(Buffer.from(hexToBytes(unencodedAddress)))
@@ -60,10 +60,10 @@ const createLegacyAddress = (privateKey = null) => {
     privateKey,
     publicKey,
     publicKeySHA256Hash,
-    publicKeySHA256HashRIPEMD60Hash,
-    versionAndPublicKeySHA256HashRIPEMD60Hash,
-    versionAndPublicKeySHA256HashRIPEMD60HashSHA256Hash,
-    versionAndPublicKeySHA256HashRIPEMD60HashSHA256HashSHA256Hash,
+    publicKeySHA256HashRIPEMD160Hash,
+    versionAndPublicKeySHA256HashRIPEMD160Hash,
+    versionAndPublicKeySHA256HashRIPEMD160HashSHA256Hash,
+    versionAndPublicKeySHA256HashRIPEMD160HashSHA256HashSHA256Hash,
     checksum,
     unencodedAddress,
     address
