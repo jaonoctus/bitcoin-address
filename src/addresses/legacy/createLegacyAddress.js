@@ -32,11 +32,8 @@ const createLegacyAddress = (privateKey = null) => {
   const publicKeySHA256HashRIPEMD60Hash = bytesToHex(publicKeySHA256HashRIPEMD60BytesBuffer)
 
   // 4. Add version byte in front of RIPEMD-160 hash
-  /**
-   * 0x00 -> mainnet
-   * 0x6F -> testnet
-   */
-  const version = 0x00
+  // https://en.bitcoin.it/wiki/List_of_address_prefixes
+  const version = 0x00 // mainnet
 
   const publicKeySHA256HashRIPEMD60Bytes = hexToBytes(publicKeySHA256HashRIPEMD60Hash)
 
