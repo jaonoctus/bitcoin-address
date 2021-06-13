@@ -1,8 +1,8 @@
 const { Crypto: { SHA256: sha256, util: { hexToBytes, bytesToHex } } } = require('cryptojs')
 const { crypto: { ripemd160 } } = require('bitcoinjs-lib')
 const base58 = require('bs58')
-const { createPrivateKey } = require('./createPrivateKey')
-const { createPublicKey } = require('./createPublicKey')
+const { createPrivateKey } = require('../createPrivateKey')
+const { createPublicKey } = require('../createPublicKey')
 
 /**
  * https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses

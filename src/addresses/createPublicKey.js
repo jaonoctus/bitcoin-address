@@ -34,15 +34,15 @@ const createPublicKey = (privateKey = '') => {
 
   const prefix = publicKey.slice(0, 2)
 
-  const x = publicKey.slice(2, 2 + 2 * 32)
+  const xCoordinate = publicKey.slice(2, 2 + 2 * 32)
 
-  const y = publicKey.slice(2 + 2 * 32, 2 + 4 * 32)
+  const yCoordinate = publicKey.slice(2 + 2 * 32, 2 + 4 * 32)
 
   return {
     publicKey,
     prefix,
-    x,
-    y,
+    xCoordinate,
+    yCoordinate,
   }
 }
 
